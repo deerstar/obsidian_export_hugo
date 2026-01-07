@@ -15,6 +15,9 @@ main.js
 # Exclude sourcemaps
 *.map
 
+# Release packaging output
+#release/
+
 # obsidian
 data.json
 
