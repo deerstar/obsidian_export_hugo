@@ -26,7 +26,7 @@ export default class HugoExportPlugin extends Plugin {
 
 	private async runExport(): Promise<void> {
 		try {
-			await exportCurrentNoteToHugo(this.app, this.settings.hugoContentPath);
+			await exportCurrentNoteToHugo(this.app, this.settings);
 		} catch (err: unknown) {
 			const message = err instanceof Error ? err.message : String(err);
 			new Notice("导出失败: " + message);

@@ -28,6 +28,10 @@ Given a note named `MyNote.md`, and `hugoContentPath` set to `D:\blog\content\20
 - `D:\blog\content\2025\MyNote\index.md`
 - `D:\blog\content\2025\MyNote\<images...>`
 
+If **自动序号前缀（文件夹名）** is enabled, it will scan existing subfolders under `hugoContentPath` and export to:
+
+- `D:\blog\content\2025\01_MyNote\index.md`
+
 ### Install (manual)
 
 Copy these files into your vault plugin directory:
