@@ -9,13 +9,13 @@ export default class HugoExportPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		this.addRibbonIcon("upload", "导出到 Hugo", async () => {
+		this.addRibbonIcon("upload", "Export to hugo", async () => {
 			await this.runExport();
 		});
 
 		this.addCommand({
 			id: "export-current-note-to-hugo",
-			name: "导出当前笔记到 Hugo（Page Bundle）",
+			name: "Export current note to hugo (page bundle)",
 			callback: async () => {
 				await this.runExport();
 			},
@@ -29,7 +29,7 @@ export default class HugoExportPlugin extends Plugin {
 			await exportCurrentNoteToHugo(this.app, this.settings);
 		} catch (err: unknown) {
 			const message = err instanceof Error ? err.message : String(err);
-			new Notice("导出失败: " + message);
+			new Notice("Export failed: " + message);
 			console.error(err);
 		}
 	}

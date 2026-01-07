@@ -47,20 +47,20 @@ function computeTargetFolderName(noteName: string, settings: HugoExportSettings)
 export async function exportCurrentNoteToHugo(app: App, settings: HugoExportSettings): Promise<void> {
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {
-		new Notice("没有打开的笔记");
+		new Notice("No note is open.");
 		return;
 	}
 	if (!(activeFile instanceof TFile) || activeFile.extension.toLowerCase() !== "md") {
-		new Notice("当前文件不是 Markdown 笔记");
+		new Notice("The active file is not a Markdown note.");
 		return;
 	}
 	if (!settings.hugoContentPath || settings.hugoContentPath.trim() === "") {
-		new Notice("请先在设置中配置 Hugo content 目录路径");
+		new Notice("Please set the hugo content path in settings.");
 		return;
 	}
 
 	await exportNoteFileToHugo(app, activeFile, settings);
-	new Notice("导出成功！");
+	new Notice("Export succeeded.");
 }
 
 export async function exportNoteFileToHugo(app: App, file: TFile, settings: HugoExportSettings): Promise<void> {
@@ -88,7 +88,7 @@ export async function exportNoteFileToHugo(app: App, file: TFile, settings: Hugo
 
 		if (!writtenTargets.has(targetImgPath)) {
 			const imgBuffer = await app.vault.readBinary(imgFile);
-			fs.writeFileSync(targetImgPath, Buffer.from(imgBuffer));
+			fs.writeFileSync(targetImgPath, new Uint8Array(imgBuffer));
 			writtenTargets.add(targetImgPath);
 		}
 

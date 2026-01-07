@@ -27,14 +27,14 @@ export class HugoExportSettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: "Hugo 导出设置" });
+		new Setting(containerEl).setName("Export").setHeading();
 
 		new Setting(containerEl)
-			.setName("Hugo content 目录路径")
-			.setDesc("例如：D:\\myblog\\content\\2025\\ 或 /path/to/hugo/content/2025/（建议以斜杠结尾）")
+			.setName("Hugo content path")
+			.setDesc("For example, d:\\myblog\\content\\2025\\ or /path/to/hugo/content/2025/ (ending slash recommended).")
 			.addText((text) =>
 				text
-					.setPlaceholder("输入 Hugo content 目录路径")
+					.setPlaceholder("Enter hugo content path")
 					.setValue(this.plugin.settings.hugoContentPath)
 					.onChange(async (value) => {
 						this.plugin.settings.hugoContentPath = value.trim();
@@ -43,8 +43,8 @@ export class HugoExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("自动序号前缀（文件夹名）")
-			.setDesc("导出时扫描目标目录下已有子文件夹的序号前缀，取最大值 + 1，生成如 01_笔记名 的目录。")
+			.setName("Auto numeric prefix for folder name")
+			.setDesc("Scans existing subfolders and uses the next index (max + 1), e.g. 01_mynote.")
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.enableFolderIndexPrefix).onChange(async (value) => {
 					this.plugin.settings.enableFolderIndexPrefix = value;
@@ -53,8 +53,8 @@ export class HugoExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("序号位数（补零）")
-			.setDesc("例如 2 位：01、02；3 位：001、002。")
+			.setName("Index digits (zero padded)")
+			.setDesc("Example: 2 digits -> 01, 02; 3 digits -> 001, 002.")
 			.addText((text) =>
 				text
 					.setPlaceholder("2")
@@ -68,8 +68,8 @@ export class HugoExportSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("序号分隔符")
-			.setDesc("序号与笔记名之间的分隔符，例如 '_' 或 '-'。")
+			.setName("Index separator")
+			.setDesc("Separator between the index and note name, e.g. '_' or '-'.")
 			.addText((text) =>
 				text
 					.setPlaceholder("_")
